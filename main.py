@@ -43,7 +43,7 @@ def mlm(populationOnEarth, n):
   listLevels.pop()
   total = sum(listLevels)
   total = "{:,}".format(total)
-  return (f"There will be {total} people working for this MLM. The amount of times each person can acquire {n} people is {cycle} rounds")
+  return (f"There will be {total} people working for this MLM. The amount of rounds each person can acquire {n} people is {cycle}")
 
 print(mlm(7000000000, 5))
 
