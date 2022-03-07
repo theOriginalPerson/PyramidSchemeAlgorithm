@@ -27,6 +27,7 @@ levelRecruited = the current round of how many are there (round 3 in the above l
                 ### the function itself ###
                 ###########################
 def mlm(populationOnEarth, n):
+  pop = "{:,}".format(populationOnEarth)
   cycle = 0
   levelRecruited = 0
   listLevels = []
@@ -43,7 +44,7 @@ def mlm(populationOnEarth, n):
   listLevels.pop()
   total = sum(listLevels)
   total = "{:,}".format(total)
-  return (f"There will be {total} people working for this MLM. The amount of rounds each person can acquire {n} people is {cycle}")
+  return (f"There will be {total} people working for this MLM, before reaching the total population of {pop}. The amount of rounds each person can acquire {n} people is {cycle}.")
 
 print(mlm(7000000000, 5))
 
