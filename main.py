@@ -26,11 +26,14 @@ levelRecruited = the current round of how many are there (round 3 in the above l
 ##### the work itself #####
 ###########################
 
-query = int(input("What is the population you wish to use? "))
-query2 = int(input("How many people does each person have to recruit? "))
+popPeople = int(input("What is the population you wish to use? "))
+requiredRecruits = int(input("How many people does each person have to recruit? "))
+
+commission = int(input("How much will each person's commission be? "))
+percent = float(input("What is the percentage that will be deducted from each level's salary? "))
 
 class PyramidSchemers():
-  def __init__(self, populationOnEarth=query, n=query2):
+  def __init__(self, populationOnEarth=popPeople, n=requiredRecruits):
     pop = "{:,}".format(populationOnEarth)
     cycle = 0
     levelRecruited = 0
@@ -59,7 +62,7 @@ class PyramidSchemers():
   ### Payments ###
   ################
   
-  def payment(self, pay, fee):
+  def payment(self, pay=commission, fee=percent):
     money = 0
     levelPayments = []
     hierarchy_of_payments = {}
@@ -74,6 +77,7 @@ class PyramidSchemers():
       self.levelPayments.append(self.money)
 
     self.levelPayments.reverse()
+    self.levelPayments.pop() # forget the first person bc they make no salary alone
     
     for payment in self.levelPayments:
       fpayment = "{:,}".format(payment)
@@ -82,4 +86,4 @@ class PyramidSchemers():
     return self.hierarchy
 
 pyra = PyramidSchemers()
-print(pyra.payment(100, 0.30))
+print(pyra.payment())
