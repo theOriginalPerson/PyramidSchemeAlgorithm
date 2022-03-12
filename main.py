@@ -25,8 +25,10 @@ levelRecruited = the current round of how many are there (round 3 in the above l
 ###########################
 ##### the work itself #####
 ###########################
+
 query = int(input("What is the population you wish to use? "))
 query2 = int(input("How many people does each person have to recruit? "))
+
 class PyramidSchemers():
   def __init__(self, populationOnEarth=query, n=query2):
     pop = "{:,}".format(populationOnEarth)
@@ -52,10 +54,6 @@ class PyramidSchemers():
     total = sum(self.listLevels)
     ftotal = "{:,}".format(total)
     self.ftotal = ftotal
-  
-  """
-  change the print line as you please: first element is depending on the population in your area (or if you wish to use the global population); second element is how many people each person must recruit
-  """
   
   ################
   ### Payments ###
