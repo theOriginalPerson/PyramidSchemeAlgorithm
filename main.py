@@ -2,16 +2,16 @@
 ############# The Pyramid Scheme Algorithm ################
 ###########################################################
 
-                    ################
-                    ### Overview ###
-                    ################
+################
+### Overview ###
+################
 """
 This code assumes you're a part of an MLM/Pyramid Scheme trying to recruit others. If you take in n amount of people (per person), and then those people take in n amount of people - which continues the cycle - then you'd be looking at a finite cycle of how many people you can bring in total: basically until the entire population is working for the same MLM/Pyramid Scheme. The code below shows how quickly a pyramid scheme stops.
 """
 
-        ##############################################
-        ### Legend of variables and what they mean ###
-        ##############################################
+##############################################
+### Legend of variables and what they mean ###
+##############################################
 """
 populationOnEarth = the total population you put in
 n = number of people each person has to recruit
@@ -22,32 +22,66 @@ listLevels = the list of each round of recruits (i.e. [1, 3, 9, 27]) first perso
 
 levelRecruited = the current round of how many are there (round 3 in the above list would be 9 people)
 """
-
-                ###########################
-                ### the function itself ###
-                ###########################
-def mlm(populationOnEarth, n):
-  pop = "{:,}".format(populationOnEarth)
-  cycle = 0
-  levelRecruited = 0
-  listLevels = []
+###########################
+##### the work itself #####
+###########################
+query = int(input("What is the population you wish to use? "))
+query2 = int(input("How many people does each person have to recruit? "))
+class PyramidSchemers():
+  def __init__(self, populationOnEarth=query, n=query2):
+    pop = "{:,}".format(populationOnEarth)
+    cycle = 0
+    levelRecruited = 0
+    listLevels = []
+    
+    self.pop = pop
+    self.cycle = cycle
+    self.levelRecruited = levelRecruited
+    self.listLevels = listLevels
+    
+    while sum(listLevels) < populationOnEarth:
+      self.levelRecruited = n ** self.cycle
   
-  while sum(listLevels) < populationOnEarth:
-    levelRecruited = n ** cycle
+      if sum(self.listLevels) >= populationOnEarth:
+        break
+      elif sum(self.listLevels) < populationOnEarth:
+        self.cycle += 1
+        self.listLevels.append(self.levelRecruited)
+  
+    self.listLevels.pop()
+    total = sum(self.listLevels)
+    ftotal = "{:,}".format(total)
+    self.ftotal = ftotal
+  
+  """
+  change the print line as you please: first element is depending on the population in your area (or if you wish to use the global population); second element is how many people each person must recruit
+  """
+  
+  ################
+  ### Payments ###
+  ################
+  
+  def payment(self, pay, fee):
+    money = 0
+    levelPayments = []
+    hierarchy_of_payments = {}
+    
+    self.money = money
+    self.levelPayments = levelPayments
+    self.hierarchy = hierarchy_of_payments
+    
+    for level in self.listLevels:
+      self.money = (pay * level)
+      self.money = self.money - (self.money * fee)
+      self.levelPayments.append(self.money)
 
-    if sum(listLevels) >= populationOnEarth:
-      break
-    elif sum(listLevels) < populationOnEarth:
-      cycle += 1
-      listLevels.append(levelRecruited)
+    self.levelPayments.reverse()
+    
+    for payment in self.levelPayments:
+      fpayment = "{:,}".format(payment)
+      self.hierarchy[f'Tier {self.levelPayments.index(payment) + 1}:'] = ("$" + fpayment)
 
-  listLevels.pop()
-  total = sum(listLevels)
-  total = "{:,}".format(total)
-  return (f"There will be {total} people working for this MLM, before reaching the total population of {pop}. The amount of rounds each person can acquire {n} people is {cycle}.")
+    return self.hierarchy
 
-print(mlm(7000000000, 5))
-
-"""
-change the print line as you please: first element is depending on the population in your area (or if you wish to use the global population); second element is how many people each person must recruit
-"""
+pyra = PyramidSchemers()
+print(pyra.payment(100, 0.30))
