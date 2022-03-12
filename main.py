@@ -86,4 +86,11 @@ class PyramidSchemers():
     return self.hierarchy
 
 pyra = PyramidSchemers()
-print(pyra.payment())
+print(pyra.payment()) 
+
+"""
+Recall that pyramid schemes require people to further the chain of income. The more recruits,
+the better the scheme. Most people will fall around the higher tiers (the ones that make 
+the least amount of money), and end up losing most or all of their money trying to reinvest
+in the recruitment process.
+"""
